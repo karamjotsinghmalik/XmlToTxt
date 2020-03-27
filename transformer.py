@@ -19,8 +19,10 @@ class Transformer(object):
 
     def write_to_txt(self, annotations, classes):
         for annotation in annotations:
-            with open(os.path.join(self.out_dir, self.darknet_filename_format(annotation.filename)), "w+") as f:
-                f.write(self.to_darknet_format(annotation, classes))
+            if(annotation.size.width != 0):
+                with open(os.path.join(self.out_dir, self.darknet_filename_format(annotation.filename)), "w+") as f:
+                    f.write(self.to_darknet_format(annotation, classes))
+            print(annotation.filename," complate")
 
     def to_darknet_format(self, annotation, classes):
         result = []
